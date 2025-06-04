@@ -1,0 +1,3286 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/30/2025 2:30:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-7786U1N"
+  DTS:CreatorName="DESKTOP-7786U1N\kusha"
+  DTS:DTSID="{C740FC75-ED8C-402C-A1E7-6295D190F437}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="25"
+  DTS:VersionGUID="{3601F41E-FA7F-40AA-8CEA-0A7D8480E360}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D5A71211-C1EB-48E0-8D43-E60DB44216CD}"
+      DTS:ObjectName="DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-7786U1N\SQLEXPRESS;Initial Catalog=ECommerce_ShopSmartDW;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{D5A71211-C1EB-48E0-8D43-E60DB44216CD}DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager CampProdSubCategory]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{78485098-4840-40FE-9B9F-FBE38322D960}"
+      DTS:ObjectName="Flat File Connection Manager CampProdSubCategory">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\kusha\OneDrive\Desktop\ShopSmart_SSIS_ETL_Project\CSV_Files\campaign_product_subcategory.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="campaign_product_subcategory_id"
+              DTS:DTSID="{BFC1392A-0CE3-4A79-B035-306542FA93CC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="campaign_id"
+              DTS:DTSID="{566868C2-F3B3-4029-A64D-971CAE1FAA42}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="subcategory_id"
+              DTS:DTSID="{E2B1602B-8A32-4944-83D2-EC8B5A7985D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="discount"
+              DTS:DTSID="{A2F60517-C5AD-4801-B4D4-50A4E3E23E8B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DFT_LoadCampaignSubcategory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0444FF75-70A7-45EC-AD77-88741152FE72}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DFT_LoadCampaignSubcategory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="CS_Check_CampaignID_NULL"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[NullCampaigID]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="NullCampaigID"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(campaign_id)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[NonNullCampaignID]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="NonNullCampaignID"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(campaign_id)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="CS_Check_SubCategoryID_NULL"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[NullSubCategoryID]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="NullSubCategoryID"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(subcategory_id)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[NonNullSubCategoryID]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="NonNullSubCategoryID"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">![ISNULL](#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">!ISNULL(subcategory_id)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Inputs[Data Conversion Input].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output].Columns[discount_DT]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output].Columns[discount_DT]"
+                      name="discount_DT"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="ErrorDescription_CampaignID"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Inputs[Derived Column Input].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[table_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="19"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[table_name]"
+                      name="table_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CampaignSubcategory"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CampaignSubcategory"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[error_description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="18"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[error_description]"
+                      name="error_description"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Invalid CampaignID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Invalid CampaignID"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[error_data]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[error_data]"
+                      name="error_data"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">campaign_id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="ErrorDescription_SubCategoryID"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Inputs[Derived Column Input].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[table_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="19"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[table_name]"
+                      name="table_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CampaignSubcategory"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CampaignSubcategory"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[error_description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="21"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[error_description]"
+                      name="error_description"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"Invalid SubCategoryID"</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"Invalid SubCategoryID"</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[error_data]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[error_data]"
+                      name="error_data"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">subcategory_id</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="16393"
+              name="FF_CampaignSubcategory"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager CampProdSubCategory]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager CampProdSubCategory]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[campaign_product_subcategory_id]"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]"
+                      name="campaign_product_subcategory_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[campaign_id]"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]"
+                      name="campaign_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[subcategory_id]"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]"
+                      name="subcategory_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[discount]"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]"
+                      name="discount"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[campaign_product_subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="campaign_product_subcategory_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[campaign_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="campaign_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="subcategory_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].ExternalColumns[discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="discount" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\ID's Formation"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="ID's Formation"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CMP_PROD_SUB_CAT_ID_" + [RIGHT]("0000" + #{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]},4)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CMP_PROD_SUB_CAT_ID_" + RIGHT("0000" + campaign_product_subcategory_id,4)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"CMP_ID_" + [RIGHT]("00" + #{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]},2)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"CMP_ID_" + RIGHT("00" + campaign_id,2)</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">"SUB_CAT_ID_" + [RIGHT]("000" + #{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]},3)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">"SUB_CAT_ID_" + RIGHT("000" + subcategory_id,3)</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LU_For CampaignID"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimMarketingCampaign]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimMarketingCampaign]) [refTable]
+where [refTable].[campaign_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="campaign_id" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="campaign_name" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="offer_week" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Inputs[Lookup Input].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">campaign_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LU_For SubCategoryID"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimSubcategory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimSubcategory]) [refTable]
+where [refTable].[subcategory_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="subcategory_id" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="subcategory_name" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="category_id" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Inputs[Lookup Input].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">subcategory_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\NULL Handling"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="NULL Handling"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LEN]([TRIM](#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]})) == 0 ? NULL(DT_WSTR,50) : #{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LEN(TRIM(campaign_product_subcategory_id)) == 0 ? NULL(DT_WSTR,50) : campaign_product_subcategory_id</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LEN]([TRIM](#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]})) == 0 ? NULL(DT_WSTR,50) : #{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LEN(TRIM(campaign_id)) == 0 ? NULL(DT_WSTR,50) : campaign_id</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[LEN]([TRIM](#{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]})) == 0 ? NULL(DT_WSTR,50) : #{Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">LEN(TRIM(subcategory_id)) == 0 ? NULL(DT_WSTR,50) : subcategory_id</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB BadLogData"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[BadDataLog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].Columns[table_name]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="table_name"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[table_name]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[table_name]" />
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].Columns[error_description]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="error_description"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[error_description]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_description]" />
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].Columns[error_data]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="error_data"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[error_data]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_data]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[log_id]"
+                      dataType="i4"
+                      name="log_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[table_name]"
+                      dataType="wstr"
+                      length="100"
+                      name="table_name" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[error_description]"
+                      dataType="nText"
+                      name="error_description" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[error_data]"
+                      dataType="nText"
+                      name="error_data" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input].ExternalColumns[log_date]"
+                      dataType="dbTimeStamp"
+                      name="log_date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB StgFactCampaignSubcategory"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[StgFactCampaignSubcategory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-7786U1N\SQLEXPRESS.ECommerce_ShopSmartDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[campaign_product_subcategory_id]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]" />
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[campaign_id]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_id]" />
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[subcategory_id]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[subcategory_id]" />
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      externalMetadataColumnId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[discount]"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount_DT]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[campaign_product_subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="campaign_product_subcategory_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[campaign_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="campaign_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="subcategory_id" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[discount]"
+                      dataType="r8"
+                      name="discount" />
+                    <externalMetadataColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input].ExternalColumns[LoadDateTime]"
+                      dataType="dbTimeStamp"
+                      name="LoadDateTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="UA_ErrorRecords"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output].Columns[discount_DT]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount_DT]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[table_name]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="table_name"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[table_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[table_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[error_description]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="error_description"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[error_description]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_description]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1].Columns[error_data]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="error_data"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output].Columns[error_data]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_data]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount_DT]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[table_name]"
+                      cachedDataType="wstr"
+                      cachedLength="19"
+                      cachedName="table_name"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[table_name]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[table_name]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2].Columns[error_data]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="error_data"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output].Columns[error_data]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_data]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]"
+                      name="campaign_product_subcategory_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[campaign_id]"
+                      name="campaign_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[subcategory_id]"
+                      name="subcategory_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount]"
+                      name="discount" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount_DT]"
+                      dataType="r8"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[discount_DT]"
+                      name="discount_DT" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[table_name]"
+                      dataType="wstr"
+                      length="19"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[table_name]"
+                      name="table_name" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_description]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_description]"
+                      name="error_description" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_data]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1].Columns[error_data]"
+                      name="error_data" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="UA_ValidID and NULL CampaignID"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output].Columns[discount_DT]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_product_subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output].Columns[discount]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output].Columns[discount_DT]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]"
+                      name="campaign_product_subcategory_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]"
+                      name="campaign_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]"
+                      name="subcategory_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]"
+                      name="discount" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]"
+                      dataType="r8"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]"
+                      name="discount_DT" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="UA_ValidID and NULL SubCategoryID"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount_DT]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2].Columns[campaign_product_subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_product_subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2].Columns[campaign_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="campaign_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[campaign_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2].Columns[subcategory_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="subcategory_id"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[subcategory_id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[subcategory_id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2].Columns[discount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="discount"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2].Columns[discount_DT]"
+                      cachedDataType="r8"
+                      cachedName="discount_DT"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1].Columns[discount_DT]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount_DT]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_product_subcategory_id]"
+                      name="campaign_product_subcategory_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[campaign_id]"
+                      name="campaign_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[subcategory_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[subcategory_id]"
+                      name="subcategory_id" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount]"
+                      name="discount" />
+                    <outputColumn
+                      refId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount_DT]"
+                      dataType="r8"
+                      lineageId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1].Columns[discount_DT]"
+                      name="discount_DT" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Data Conversion Output]"
+              endId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output]"
+              endId="Package\DFT_LoadCampaignSubcategory\Data Conversion.Inputs[Data Conversion Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output1]"
+              endId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Inputs[Conditional Split Input]"
+              name="Derived Column Output"
+              startId="Package\DFT_LoadCampaignSubcategory\ID's Formation.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output2]"
+              endId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output3]"
+              endId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Inputs[Union All Input 1]"
+              name="Derived Column Output"
+              startId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Flat File Source Output]"
+              endId="Package\DFT_LoadCampaignSubcategory\NULL Handling.Inputs[Derived Column Input]"
+              name="Flat File Source Output"
+              startId="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Lookup Match Output]"
+              endId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 2]"
+              name="Lookup Match Output"
+              startId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Lookup Match Output1]"
+              endId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 2]"
+              name="Lookup Match Output"
+              startId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Lookup No Match Output1]"
+              endId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Lookup No Match Output]"
+              endId="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[NonNullCampaignID]"
+              endId="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID.Inputs[Lookup Input]"
+              name="NonNullCampaignID"
+              startId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[NonNullCampaignID]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[NonNullSubCategoryID]"
+              endId="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID.Inputs[Lookup Input]"
+              name="NonNullSubCategoryID"
+              startId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[NonNullSubCategoryID]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[NullCampaigID]"
+              endId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Inputs[Union All Input 1]"
+              name="NullCampaigID"
+              startId="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL.Outputs[NullCampaigID]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[NullSubCategoryID]"
+              endId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Inputs[Union All Input 1]"
+              name="NullSubCategoryID"
+              startId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Outputs[NullSubCategoryID]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Union All Output 1]"
+              endId="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL.Inputs[Conditional Split Input]"
+              name="Union All Output 1"
+              startId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Union All Output 11]"
+              endId="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords.Outputs[Union All Output 1]" />
+            <path
+              refId="Package\DFT_LoadCampaignSubcategory.Paths[Union All Output 12]"
+              endId="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Stored Cleaned Records in FactCampaignSubcategory"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A43418F3-1331-449F-B37B-277C173B6E95}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Stored Cleaned Records in FactCampaignSubcategory"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D5A71211-C1EB-48E0-8D43-E60DB44216CD}"
+          SQLTask:SqlStatementSource="MERGE INTO FactCampaignSubcategory AS Target&#xA;USING StgFactCampaignSubcategory AS Source&#xA;    ON Target.campaign_product_subcategory_id = Source.campaign_product_subcategory_id&#xA;WHEN MATCHED AND (&#xA;        (Target.campaign_id &lt;&gt; Source.campaign_id OR (Target.campaign_id IS NULL AND Source.campaign_id IS NOT NULL) OR (Target.campaign_id IS NOT NULL AND Source.campaign_id IS NULL)) OR&#xA;        (Target.subcategory_id &lt;&gt; Source.subcategory_id OR (Target.subcategory_id IS NULL AND Source.subcategory_id IS NOT NULL) OR (Target.subcategory_id IS NOT NULL AND Source.subcategory_id IS NULL)) OR&#xA;        (Target.discount &lt;&gt; Source.discount)&#xA;    )&#xA;    THEN UPDATE SET&#xA;        Target.campaign_id = Source.campaign_id,&#xA;        Target.subcategory_id = Source.subcategory_id,&#xA;        Target.discount = Source.discount&#xA;WHEN NOT MATCHED BY TARGET&#xA;    THEN INSERT (campaign_product_subcategory_id, campaign_id, subcategory_id, discount)&#xA;         VALUES (Source.campaign_product_subcategory_id, Source.campaign_id, Source.subcategory_id, Source.discount)&#xA;OUTPUT&#xA;    $action AS ActionType,&#xA;    inserted.campaign_product_subcategory_id AS CampaignProductSubcategoryID,&#xA;    GETDATE() AS ActionDateTime,&#xA;    SYSTEM_USER AS PerformedBy,&#xA;    deleted.campaign_id AS Old_campaign_id,&#xA;    inserted.campaign_id AS New_campaign_id,&#xA;    deleted.subcategory_id AS Old_subcategory_id,&#xA;    inserted.subcategory_id AS New_subcategory_id,&#xA;    deleted.discount AS Old_discount,&#xA;    inserted.discount AS New_discount&#xA;INTO CampaignSubcategoryAuditLog (&#xA;    ActionType,&#xA;    CampaignProductSubcategoryID,&#xA;    ActionDateTime,&#xA;    PerformedBy,&#xA;    Old_campaign_id,&#xA;    New_campaign_id,&#xA;    Old_subcategory_id,&#xA;    New_subcategory_id,&#xA;    Old_discount,&#xA;    New_discount&#xA;);&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Stg_Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{065E83A2-BF61-4A87-A9AF-2B083707C8C8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Stg_Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D5A71211-C1EB-48E0-8D43-E60DB44216CD}"
+          SQLTask:SqlStatementSource="truncate table StgFactCampaignSubcategory" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E80A9327-C12E-4EB0-BDA3-AD789B1E3013}"
+      DTS:From="Package\Truncate Stg_Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DFT_LoadCampaignSubcategory" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{57F436FB-D0D5-4E5F-8C6A-0F47D5D215FB}"
+      DTS:From="Package\DFT_LoadCampaignSubcategory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Stored Cleaned Records in FactCampaignSubcategory" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="233.6,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory"
+          TopLeft="486.666640076374,259.133331531352" />
+        <NodeLayout
+          Size="332,41.6"
+          Id="Package\Stored Cleaned Records in FactCampaignSubcategory"
+          TopLeft="437.499976096055,356.19999752303" />
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Truncate Stg_Table"
+          TopLeft="519.166638300652,170.733332146075" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="603.716639188513,212.333332146075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7999993852772"
+              Start="0,0"
+              End="0,39.2999993852772">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2999993852772" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="603.483308086214,300.733331531353">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.4666659916775"
+              Start="0,0"
+              End="0,47.9666659916775">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.9666659916775" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DFT_LoadCampaignSubcategory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\Data Conversion"
+          TopLeft="435.6249761985,178.533332091834" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData"
+          TopLeft="401.458311398619,688.866662899984" />
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID"
+          TopLeft="686.458295826906,435.733330753909" />
+        <NodeLayout
+          Size="145.6,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\ID's Formation"
+          TopLeft="435.624976198501,261.733331513273" />
+        <NodeLayout
+          Size="230.4,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\ErrorDescription_SubCategoryID"
+          TopLeft="664.791630344053,520.199997089107" />
+        <NodeLayout
+          Size="237.6,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\CS_Check_SubCategoryID_NULL"
+          TopLeft="658.958297329439,349.933331350551" />
+        <NodeLayout
+          Size="260.8,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory"
+          TopLeft="948.124948196736,689.866661869419" />
+        <NodeLayout
+          Size="148.8,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\NULL Handling"
+          TopLeft="440.624975925313,100.099999303917" />
+        <NodeLayout
+          Size="242.4,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL CampaignID"
+          TopLeft="344.791647828082,402.666664111349" />
+        <NodeLayout
+          Size="202.4,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\FF_CampaignSubcategory"
+          TopLeft="411.666644174193,30.3333331223991" />
+        <NodeLayout
+          Size="217.6,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\ErrorDescription_CampaignID"
+          TopLeft="49.7916639461701,521.733329705265" />
+        <NodeLayout
+          Size="160.8,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\UA_ErrorRecords"
+          TopLeft="412.291644140045,604.199996293584" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID"
+          TopLeft="78.9583290192403,434.733330555028" />
+        <NodeLayout
+          Size="255.2,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\UA_ValidID and NULL SubCategoryID"
+          TopLeft="945.624948333331,396.73333102511" />
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\DFT_LoadCampaignSubcategory\CS_Check_CampaignID_NULL"
+          TopLeft="57.291663536388,350.66666447295" />
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output]"
+          TopLeft="514.324976061906,141.699999303917">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.8333327879172"
+              Start="0,0"
+              End="0,29.3333327879172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3333327879172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Data Conversion Output]"
+          TopLeft="511.024976198501,220.133332091834">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5999994214376"
+              Start="0,0"
+              End="0,34.0999994214376">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0999994214376" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Union All Output 12]"
+          TopLeft="1075.87494826504,438.333331025111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,251.533330844309"
+              Start="0,0"
+              End="0,244.033330844309">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,244.033330844309" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Union All Output 11]"
+          TopLeft="491.274977769331,645.799996293585">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.0666666064"
+              Start="0,0"
+              End="0,35.5666666064">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5666666064" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Union All Output 1]"
+          TopLeft="587.191647828081,423.466664111349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="71.7666495013575,-52.7333327607977"
+              Start="0,0"
+              End="64.2666495013575,-52.7333327607977">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.8833247506788,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.8833247506788,0"
+                    Point2="35.8833247506788,0"
+                    Point3="35.8833247506788,-4" />
+                  <mssgle:LineSegment
+                    End="35.8833247506788,-48.7333327607977" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.8833247506788,-48.7333327607977"
+                    Point2="35.8833247506788,-52.7333327607977"
+                    Point3="39.8833247506788,-52.7333327607977" />
+                  <mssgle:LineSegment
+                    End="64.2666495013575,-52.7333327607977" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[NullSubCategoryID]"
+          TopLeft="896.558297329439,370.733331350552">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49.0666510038911,46.7999996745587"
+              Start="0,0"
+              End="41.5666510038911,46.7999996745587">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="20.5333255019456,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.5333255019456,0"
+                    Point2="24.5333255019456,0"
+                    Point3="24.5333255019456,4" />
+                  <mssgle:LineSegment
+                    End="24.5333255019456,42.7999996745587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5333255019456,42.7999996745587"
+                    Point2="24.5333255019456,46.7999996745587"
+                    Point3="28.5333255019456,46.7999996745587" />
+                  <mssgle:LineSegment
+                    End="41.5666510038911,46.7999996745587" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.6528854355544,-17.6630859375,84.372421875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[NullCampaigID]"
+          TopLeft="281.291663536387,371.46666447295">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="63.4999842916935,46.3999996383986"
+              Start="0,0"
+              End="55.9999842916935,46.3999996383986">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="32.6888798129785,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.6888798129785,0"
+                    Point2="36.6888798129785,0"
+                    Point3="36.6888798129785,4" />
+                  <mssgle:LineSegment
+                    End="36.6888798129785,42.3999996383986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.6888798129785,42.3999996383986"
+                    Point2="36.6888798129785,46.3999996383986"
+                    Point3="40.6888798129785,46.3999996383986" />
+                  <mssgle:LineSegment
+                    End="55.9999842916935,46.3999996383986" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="3.41266887547849,-17.6630859375,66.552421875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[NonNullSubCategoryID]"
+          TopLeft="778.908296578173,391.533331350551">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.1999994033575"
+              Start="0,0"
+              End="0,36.6999994033575">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.6999994033575" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-51.0262109375,12.5184567329287,102.052421875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[NonNullCampaignID]"
+          TopLeft="167.524996277814,392.26666447295">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.4666660820777"
+              Start="0,0"
+              End="0,34.9666660820777">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.9666660820777" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-44.9062109375,11.6517900722889,89.812421875,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Lookup No Match Output1]"
+          TopLeft="162.174996482705,476.333330555029">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.3999991502363"
+              Start="0,0"
+              End="0,37.8999991502363">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.8999991502363" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,13.1453120751182,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Lookup No Match Output]"
+          TopLeft="780.024963085479,477.333330753909">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.8666663351984"
+              Start="0,0"
+              End="0,35.3666663351984">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.3666663351984" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-55.80638671875,11.8786456675992,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Lookup Match Output1]"
+          TopLeft="873.658295826905,456.533330753909">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="71.9666525064248,-33.3999997287989"
+              Start="0,0"
+              End="64.4666525064248,-33.3999997287989">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.5807325592676,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.5807325592676,0"
+                    Point2="41.5807325592676,0"
+                    Point3="41.5807325592676,-4" />
+                  <mssgle:LineSegment
+                    End="41.5807325592676,-29.3999997287989" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.5807325592676,-29.3999997287989"
+                    Point2="41.5807325592676,-33.3999997287989"
+                    Point3="45.5807325592676,-33.3999997287989" />
+                  <mssgle:LineSegment
+                    End="64.4666525064248,-33.3999997287989" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-6.61065415948237,1,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Lookup Match Output]"
+          TopLeft="252.558329019241,455.533330555028">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92.2333188088411,-26.4666664436791"
+              Start="0,0"
+              End="84.7333188088411,-26.4666664436791">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="49.2903619784415,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.2903619784415,0"
+                    Point2="53.2903619784415,0"
+                    Point3="53.2903619784415,-4" />
+                  <mssgle:LineSegment
+                    End="53.2903619784415,-22.4666664436791" />
+                  <mssgle:CubicBezierSegment
+                    Point1="53.2903619784415,-22.4666664436791"
+                    Point2="53.2903619784415,-26.4666664436791"
+                    Point3="57.2903619784415,-26.4666664436791" />
+                  <mssgle:LineSegment
+                    End="84.7333188088411,-26.4666664436791" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="5.09897525969149,1,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Flat File Source Output]"
+          TopLeft="513.945810049753,71.9333331223991">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.1666661815182"
+              Start="0,0"
+              End="0,20.6666661815182">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.6666661815182" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output3]"
+          TopLeft="158.591663946171,563.333329705265">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="308.633313527208,40.8666665883196"
+              Start="0,0"
+              End="308.633313527208,33.3666665883196">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2784235987751" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2784235987751"
+                    Point2="0,24.2784235987751"
+                    Point3="4,24.2784235987751" />
+                  <mssgle:LineSegment
+                    End="304.633313527208,24.2784235987751" />
+                  <mssgle:CubicBezierSegment
+                    Point1="304.633313527208,24.2784235987751"
+                    Point2="308.633313527208,24.2784235987751"
+                    Point3="308.633313527208,28.2784235987751" />
+                  <mssgle:LineSegment
+                    End="308.633313527208,33.3666665883196" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output2]"
+          TopLeft="779.991630344054,561.799997089107">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-261.833319537342,42.3999992044767"
+              Start="0,0"
+              End="-261.833319537342,34.8999992044767">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.1893591332999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.1893591332999"
+                    Point2="0,25.1893591332999"
+                    Point3="-4,25.1893591332999" />
+                  <mssgle:LineSegment
+                    End="-257.833319537342,25.1893591332999" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-257.833319537342,25.1893591332999"
+                    Point2="-261.833319537342,25.1893591332999"
+                    Point3="-261.833319537342,29.1893591332999" />
+                  <mssgle:LineSegment
+                    End="-261.833319537342,34.8999992044767" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT_LoadCampaignSubcategory.Paths[Derived Column Output1]"
+          TopLeft="508.424976198501,303.333331513272">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-339.133312662112,47.3333329596783"
+              Start="0,0"
+              End="-339.133312662112,39.8333329596783">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.6666664798392" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.6666664798392"
+                    Point2="0,23.6666664798392"
+                    Point3="-4,23.6666664798392" />
+                  <mssgle:LineSegment
+                    End="-335.133312662112,23.6666664798392" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-335.133312662112,23.6666664798392"
+                    Point2="-339.133312662112,23.6666664798392"
+                    Point3="-339.133312662112,27.6666664798392" />
+                  <mssgle:LineSegment
+                    End="-339.133312662112,39.8333329596783" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_LoadCampaignSubcategory\OLE DB BadLogData">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_LoadCampaignSubcategory\LU_For SubCategoryID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimSubcategory]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_LoadCampaignSubcategory\OLE DB StgFactCampaignSubcategory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT_LoadCampaignSubcategory\LU_For CampaignID">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimMarketingCampaign]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
